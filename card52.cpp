@@ -1,4 +1,4 @@
-/**
+/*
 	author: Xingjian
 	since: 2019/11/26
 */
@@ -9,6 +9,7 @@
 #include <cstring>
 using namespace std;
 
+// constant declaration
 #define CARD 52
 #define NUM 13
 #define COLOR 4
@@ -21,7 +22,9 @@ void print(int *,int);
 void print_card(int *,int,const char *[],const char *[]);
 void apply(int *,int,int *[]);
 void print_apply(int *[],int,const char *[],const char *[]);
-string is_brother(int *[],int);
+bool have_one_pairs(int *[],int);
+int pairs(int *[],int);
+
 int main(int argc, char const *argv[])
 {
 	// 4 colors
@@ -33,13 +36,20 @@ int main(int argc, char const *argv[])
 
 	init(card,CARD);
 	shuffle(card,CARD);
+	cout<<"shuffled card index:"<<endl;
 	print(card,CARD);
+	cout<<"shuffled card:"<<endl;
 	print_card(card,CARD,suit,face);
 
 	int *q[5];
 	apply(card,5,q);
 	print_apply(q,5,suit,face);
-	cout<<"is brother?"<<is_brother(q,5)<<endl;
+	cout<<"these cards have one pairs? ";
+	if(have_one_pairs(q,5)) {
+		cout<<"YES"<<endl;
+	} else {
+		cout<<"NO"<<endl;
+	}
 
 	return 0;
 }
@@ -67,15 +77,13 @@ void shuffle(int *p,int n)
 // swap two integer
 void swap(int *a,int *b)
 {
-	/*
+	// take care of a=b, otherwise *a will be 0
+	if(a == b) {
+		return;
+	}
 	*a = *a ^ *b;
 	*b = *a ^ *b;
 	*a = *a ^ *b;
-	*/
-	int temp;
-	temp = *a;
-	*a = *b;
-	*b = temp;
 }
 
 // apply card
@@ -112,9 +120,10 @@ void print_card(int *p,int n,const char *suit[],const char *face[])
 	cout<<endl;
 }
 
+// print applied card
 void print_apply(int *q[],int n,const char *suit[],const char *face[])
 {
-	cout<<"applied "<<n<<" cards"<<endl;
+	cout<<"applied "<<n<<" cards:"<<endl;
 	for(int i = 0; i< n; i++) {
 		/*
 		int color = *q[i] / NUM;
@@ -127,16 +136,28 @@ void print_apply(int *q[],int n,const char *suit[],const char *face[])
 	cout<<endl;
 }
 
-string is_brother(int *q[],int n)
+// these cards have one pairs?
+bool have_one_pairs(int *q[],int n)
 {
+	int pair = pairs(q,n);
+	if(1 == pair) {
+		return true;
+	}
+	return false;
+}
+
+// get pairs int the card
+int pairs(int *q[],int n)
+{
+	int pair = 0;
 	for(int i=0; i<n; i++) {
-		int a = *(*(q+i)) % NUM;
+		int the = *(*(q+i)) % NUM;
 		for(int j=i+1; j<n; j++) {
-			int b = *(*(q+j)) % NUM;
-			if(a == b) {
-				return "true";
+			int that = *(*(q+j)) % NUM;
+			if(the == that) {
+				pair++;
 			}
 		}
 	}
-	return "false";
+	return pair;
 }
