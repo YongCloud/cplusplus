@@ -1,7 +1,7 @@
 /**
-	Basic programming concepts.
-	author: Xingjian
-	since: 2019/10/15
+ Basic programming concepts.
+ author: Xingjian
+ since: 2019/10/15
 */
 #include <iostream>
 using namespace std;
