@@ -30,6 +30,8 @@ int main() {
 	// head node
 	Node *h1,*h2;
 	// initialize head node
+	// h1 = new Node; -> delete h1
+	// free(h1)
 	h1 = (Node *)calloc(1,sizeof(Node));
 	if(h1 == NULL) {
 		cout<<msg<<endl;
