@@ -1,6 +1,6 @@
 /*
  linkedlist demonstration.
- @author xinjian
+ @author xingjian
  @since 2019/12/04
 */
 #include <iostream>
@@ -15,7 +15,6 @@ const char *msg = "Failed to apply for memory.";
 typedef struct Node {
 	int no;
 	char name[MAX_LENGTH];
-
 	// pointer to next Node
 	Node *next;
 } Node;
@@ -42,13 +41,13 @@ int main() {
 		return 1;
 	}
 
-	cout<<"how many students in linked list a?"<<endl;
+	cout<<"how many students in linkedlist a?"<<endl;
 	cin>>a;
 	input_stu_info(h1,a);
 	cout<<"students information in linkedlist a:"<<endl;
 	print_stu_info(h1);
 
-	cout<<"how many students in linked list b?"<<endl;
+	cout<<"how many students in linkedlist b?"<<endl;
 	cin>>b;
 	input_stu_info(h2,b);
 	cout<<"students information in linkedlist b:"<<endl;
