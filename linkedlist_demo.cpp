@@ -79,7 +79,6 @@ void input_stu_info(Node * const h)
 // when a same student NO. in linkedlis hb.
 void delete_same(Node * const ha,Node * const hb)
 {
-	int n = ha->no;
 	Node *p = ha;
 	Node *q = p->next;
 	while(q) {
@@ -89,13 +88,12 @@ void delete_same(Node * const ha,Node * const hb)
 			free(q);
 			q = NULL;
 			q = p->next;
-			n--;
+			ha->no--;
 		} else {
 			p = q;
 			q = p->next;
 		}
 	}
-	ha->no = n;
 }
 
 bool exist(Node * const h,int no)
