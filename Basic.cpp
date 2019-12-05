@@ -1,6 +1,6 @@
 /**
  Basic programming concepts.
- author Xingjian
+ author xingjian
  since 2019/10/15
 */
 #include <iostream>
