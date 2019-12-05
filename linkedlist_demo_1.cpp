@@ -72,6 +72,7 @@ void input_stu_info(struct Node *h,int n) {
 		}
 		cout<<"please input NO. and name:"<<endl;
 		cin>>node->no>>node->name;
+		// cout<<node->next<<endl;
 		// when allocate memory with new keyword,
 		// we must let node->next be NULL
 		node->next = NULL;
