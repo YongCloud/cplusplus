@@ -1,7 +1,7 @@
 /*
  linkedlist demonstration.
- @author xingjian
- @since 2019/12/04
+ author xingjian
+ since 2019/12/04
 */
 #include <iostream>
 #include <cstdlib>
@@ -20,52 +20,49 @@ typedef struct Node {
 } Node;
 
 // function declaration
-void input_stu_info(Node *,int);
-void delete_same(Node *,Node *);
-void print_stu_info(Node *);
-bool exist(Node *,int);
+void input_stu_info(Node * const);
+void delete_same(Node * const,Node * const);
+void print_stu_info(Node * const);
+bool exist(Node * const,int);
 
-int main() {
-	int a,b;
-	// head node
-	Node *h1,*h2;
-	// initialize head node
-	// h1 = new Node; -> delete h1
-	// free(h1)
-	h1 = (Node *)calloc(1,sizeof(Node));
-	if(h1 == NULL) {
+int main()
+{
+	// declare head node and initialize it
+	Node * const ha = (Node *)calloc(1,sizeof(Node));
+	if(ha == NULL) {
 		cout<<msg<<endl;
 		return 1;
 	}
-	h2 = (Node *)calloc(1,sizeof(Node));
-	if(h2 == NULL) {
+	Node * const hb = (Node *)calloc(1,sizeof(Node));
+	if(hb == NULL) {
 		cout<<msg<<endl;
 		return 1;
 	}
 
 	cout<<"how many students in linkedlist a?"<<endl;
-	cin>>a;
-	input_stu_info(h1,a);
+	cin>>ha->no;
+	input_stu_info(ha);
 	cout<<"students information in linkedlist a:"<<endl;
-	print_stu_info(h1);
+	print_stu_info(ha);
 
 	cout<<"how many students in linkedlist b?"<<endl;
-	cin>>b;
-	input_stu_info(h2,b);
+	cin>>hb->no;
+	input_stu_info(hb);
 	cout<<"students information in linkedlist b:"<<endl;
-	print_stu_info(h2);
+	print_stu_info(hb);
 
-	delete_same(h1,h2);
+	delete_same(ha,hb);
 	cout<<"students information in linkedlist a after deleting:"<<endl;
-	print_stu_info(h1);
+	print_stu_info(ha);
 
 	return 0;
 }
 
 // input students information
-void input_stu_info(Node *h,int n) {
+void input_stu_info(Node * const h)
+{
 	Node *p = h;
-	for(int i=0; i<n; i++) {
+	for(int i=0; i<h->no; i++) {
 		Node *node = (Node *)calloc(1,sizeof(Node));
 		if(node == NULL) {
 			cout<<msg<<endl;
@@ -78,26 +75,31 @@ void input_stu_info(Node *h,int n) {
 	}
 }
 
-// remove student information from linkedlist h1,
-// when a same student NO. in linkedlis h2.
-void delete_same(Node *h1,Node *h2) {
-	Node *p = h1;
+// remove student information from linkedlist ha,
+// when a same student NO. in linkedlis hb.
+void delete_same(Node * const ha,Node * const hb)
+{
+	int n = ha->no;
+	Node *p = ha;
 	Node *q = p->next;
 	while(q) {
-		if(exist(h2,q->no)) {
+		if(exist(hb,q->no)) {
 			// delete node
 			p->next = q->next;
 			free(q);
 			q = NULL;
 			q = p->next;
+			n--;
 		} else {
 			p = q;
 			q = p->next;
 		}
 	}
+	ha->no = n;
 }
 
-bool exist(Node *h,int no) {
+bool exist(Node * const h,int no)
+{
 	Node *p = h;
 	while(p->next) {
 		p = p->next;
@@ -108,8 +110,9 @@ bool exist(Node *h,int no) {
 	return false;
 }
 
-// students information in the linkedlist
-void print_stu_info(Node *h) {
+// print students information in the linkedlist
+void print_stu_info(Node * const h)
+{
 	Node *p = h;
 	cout<<"NO.\t"<<"Name"<<endl;
 	while(p->next) {

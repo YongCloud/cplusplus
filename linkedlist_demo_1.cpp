@@ -1,8 +1,8 @@
 /*
  linkedlist demonstration.
  use new keyword and remove typedef keyword.
- @author xingjian
- @since 2019/12/04
+ author xingjian
+ since 2019/12/04
 */
 #include <iostream>
 using namespace std;
@@ -21,12 +21,13 @@ struct Node {
 };
 
 // function declaration
-void input_stu_info(struct Node *,int);
-void delete_same(struct Node *,struct Node *);
-void print_stu_info(struct Node *);
-bool exist(struct Node *,int);
+void input_stu_info(struct Node * const,int);
+void delete_same(struct Node * const,struct Node * const);
+void print_stu_info(struct Node * const);
+bool exist(struct Node *const,int);
 
-int main() {
+int main()
+{
 	int a,b;
 	// head node
 	Node *h1,*h2;
@@ -62,7 +63,8 @@ int main() {
 }
 
 // input students information
-void input_stu_info(struct Node *h,int n) {
+void input_stu_info(struct Node * const h,int n)
+{
 	struct Node *p = h;
 	for(int i=0; i<n; i++) {
 		struct Node *node = new struct Node;
@@ -81,13 +83,14 @@ void input_stu_info(struct Node *h,int n) {
 	}
 }
 
-// remove student information from linkedlist h1,
-// when a same student NO. in linkedlis h2.
-void delete_same(struct Node *h1,struct Node *h2) {
-	struct Node *p = h1;
+// remove student information from linkedlist ha,
+// when a same student NO. in linkedlis hb.
+void delete_same(struct Node * const ha,struct Node *hb)
+{
+	struct Node *p = ha;
 	struct Node *q = p->next;
 	while(q) {
-		if(exist(h2,q->no)) {
+		if(exist(hb,q->no)) {
 			// delete node
 			p->next = q->next;
 			delete q;
@@ -100,7 +103,8 @@ void delete_same(struct Node *h1,struct Node *h2) {
 	}
 }
 
-bool exist(struct Node *h,int no) {
+bool exist(struct Node * const h,int no)
+{
 	struct Node *p = h;
 	while(p->next) {
 		p = p->next;
@@ -111,8 +115,9 @@ bool exist(struct Node *h,int no) {
 	return false;
 }
 
-// students information in the linkedlist
-void print_stu_info(struct Node *h) {
+// print students information in the linkedlist
+void print_stu_info(struct Node * const h)
+{
 	struct Node *p = h;
 	cout<<"NO.\t"<<"Name"<<endl;
 	while(p->next) {
