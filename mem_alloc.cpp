@@ -1,7 +1,7 @@
 /*
  C++ new and delete keywords demonstration.
- @author xingjian
- @since 2019/12/03
+ author xingjian
+ since 2019/12/03
 */
 #include <iostream>
 using namespace std;

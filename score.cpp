@@ -1,7 +1,7 @@
 /*
  9个学生各选了5门课，求总成绩第七名的学生的平均成绩
- author: Xingjian
- since: 2019/10/15
+ author xingjian
+ since 2019/10/15
 */
 #include <iostream>
 using namespace std;

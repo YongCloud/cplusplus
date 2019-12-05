@@ -1,7 +1,7 @@
 /*
  calculate e to the power of x.
- author: Xingjian
- since: 2019/12/02
+ author xingjian
+ since 2019/12/02
 */
 #include <iostream>
 using namespace std;

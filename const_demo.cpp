@@ -1,7 +1,7 @@
 /*
  C++ const keyword demonstartion.
- @author xingjian
- @since 2019/12/05
+ author xingjian
+ since 2019/12/05
 */
 #include <iostream>
 using namespace std;

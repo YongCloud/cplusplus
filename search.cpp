@@ -1,8 +1,8 @@
 /*
  在一个5*5的矩阵中，找出最大数与中间位置上的数交换，
  找出最小的四个数与四角上的数交换（左小右大，上小下大）。
- author: Xingjian, Nanjing University C++ teacher
- since: 2019/10/23
+ author xingjian, Nanjing University C++ teacher
+ since 2019/10/23
 */
 #include <iostream>
 #include <iomanip>
