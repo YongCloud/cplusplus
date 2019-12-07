@@ -50,7 +50,7 @@ double item(int x,int n)
 int power(int x,int n)
 {
 	int r = 1;
-	for(int i = 1; i <= n; i++) {
+	for(int i = 0; i < n; i++) {
 		r *= x;
 	}
 	return r;
