@@ -14,14 +14,19 @@ class CDate {
 		int year;
 
 	public:
-		// constructor with no parameter
 		Cdate() {
+			cout<<"constructor with no parameter"<<endl;
 		}
 
 		Cdate(int d,int m,int y) {
+			cout<<"constructor with three parameters"<<endl;
 			day=d;
 			month=m;
 			year=y;
+		}
+
+		~CDate() {
+			cout<<"destructor called"<<endl;
 		}
 
 		void setDay(int d) {
@@ -57,63 +62,7 @@ class CDate {
 			return year;
 		}
 
-
-		void addOneDay() {
-			int temp = day + 1;
-			switch(month) {
-				case 1:
-				case 3:
-				case 5:
-				case 7:
-				case 8:
-				case 10:
-					if(temp > 31) {
-						day = 1;
-						month++;
-					} else {
-						day = temp;
-					}
-					break;
-				case 12:
-					if(temp > 31) {
-						day = 1;
-						month = 1;
-						year++;
-					} else {
-						day = temp;
-					}
-					break;
-
-				case 2:
-					if(isLeapYear()) {
-						if(temp>28) {
-							day = 1;
-							month++;
-						} else {
-							day = temp;
-						}
-					} else {
-						if(temp>29) {
-							day = 1;
-							month++;
-						} else {
-							day = temp;
-						}
-					}
-					break;
-				case 4:
-				case 6:
-				case 9:
-				case 11:
-					if(temp > 30) {
-						day = 1;
-						month++;
-					} else {
-						day = temp;
-					}
-					break;
-			}
-		}
+		void addOneDay();
 
 		bool isLeapYear() {
 			if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
@@ -126,6 +75,68 @@ class CDate {
 			cout<<day<<"/"<<month<<"/"<<year<<endl;
 		}
 };
+
+void CDate::addOneDay()
+{
+	int temp = day + 1;
+	switch(month) {
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+			if(temp > 31) {
+				day = 1;
+				month++;
+			} else {
+				day = temp;
+			}
+			break;
+		case 12:
+			if(temp > 31) {
+				day = 1;
+				month = 1;
+				year++;
+			} else {
+				day = temp;
+			}
+			break;
+
+		case 2:
+			if(isLeapYear()) {
+				if(temp>28) {
+					day = 1;
+					month++;
+				} else {
+					day = temp;
+				}
+			} else {
+				if(temp>29) {
+					day = 1;
+					month++;
+				} else {
+					day = temp;
+				}
+			}
+			break;
+
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			if(temp > 30) {
+				day = 1;
+				month++;
+			} else {
+				day = temp;
+			}
+			break;
+		default:
+			cout<<"month is illegal"<<endl;
+			break;
+	}
+}
 
 int main()
 {
@@ -142,4 +153,3 @@ int main()
 
 	return 0;
 }
-
