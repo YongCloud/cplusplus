@@ -13,9 +13,8 @@ int f(int);
 int main() {
 	for(int i = 1; i < 100; i++) {
 		int result = f(i);
-		cout<<result<<endl;
 		if(result > thresh_hold) {
-			cout<<i<<endl;
+			cout<<"item "<<i<<" with value "<<result<<endl;
 			break;
 		}
 	}
@@ -24,7 +23,7 @@ int main() {
 
 /// f(1)=1,f(2)=4,f(n)=3*f(n-1) - f(n-2)
 int f(int n) {
-	if(n = 1) {
+	if(n == 1) {
 		return 1;
 	}
 	if(n == 2) {
