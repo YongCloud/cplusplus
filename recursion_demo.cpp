@@ -95,12 +95,12 @@ class ArrayList
 
 		bool add(int e) {
 			if(position >= size) {
+				cout<<"resize array"<<endl;
 				int *p = arr;
 				arr = new int[size*2];
 				if(arr == NULL) {
 					cout<<"Failed to apply for memory."<<endl;
-					size = 0;
-					position = 0;
+					arr = p;
 				} else {
 					size = 2 * size;
 					for(int i = 0; i<position; i++) {
@@ -108,9 +108,9 @@ class ArrayList
 					}
 					*(arr+position) = e;
 					position++;
+					delete []p;
+					p = NULL;
 				}
-				delete []p;
-				p = NULL;
 			} else {
 				*(arr+position) = e;
 				position++;
