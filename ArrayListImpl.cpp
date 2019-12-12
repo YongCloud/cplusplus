@@ -17,9 +17,11 @@ class ArrayListImpl : public AbstractList<T>
 		int num;
 		int length;
 
+		bool resize();
+
 		void checkInsertRange(int index);
 
-		bool resize();
+		void checkRange(int index);
 
 		bool addElement(T e) {
 			elements[num] = e;
@@ -42,13 +44,9 @@ class ArrayListImpl : public AbstractList<T>
 
 		bool insert(T e, int index);
 
-		T get(int index) {
-			return elements[0];
-		}
+		T get(int index);
 
-		T remove(int index) {
-			return elements[0];
-		}
+		T remove(int index);
 
 		int size() {
 			return num;
@@ -107,6 +105,24 @@ bool ArrayListImpl<T>::insert(T e, int index)
 }
 
 template <typename T>
+T ArrayListImpl<T>::get(int index)
+{
+	checkRange(index);
+	return *(elements+index);
+}
+
+template <typename T>
+T ArrayListImpl<T>::remove(int index)
+{
+	checkRange(index);
+	T ret = *(elements+index);
+	for(int i = index; i<num-1; i++) {
+		*(elements+i) = *(elements+i+1);
+	}
+	return ret;
+}
+
+template <typename T>
 void ArrayListImpl<T>::print()
 {
 	cout<<"[";
@@ -148,6 +164,14 @@ void ArrayListImpl<T>::checkInsertRange(int index)
 }
 
 template <typename T>
+void ArrayListImpl<T>::checkRange(int index)
+{
+	if(index < 0 || index >= num) {
+		throw out_of_range("index out of range");
+	}
+}
+
+template <typename T>
 bool ArrayListImpl<T>::insertElement(T e, int index)
 {
 	for(int i = 0; i < num - index; i++) {
@@ -161,6 +185,11 @@ bool ArrayListImpl<T>::insertElement(T e, int index)
 // test
 int main()
 {
+	/*
+	  Once add following two lines,
+	  there are compilation errors,
+	  so what happened?
+	*/
 	List<int> *p = new ArrayListImpl<int>();
 	p->print();
 
