@@ -6,12 +6,13 @@
  */
 #include "List.h"
 
+#ifndef ABSLIST_H
+#define ABSLIST_H
 template <typename T>
-class AbstractList : public List<T>
-{
+class AbstractList : public List<T> {
 	public:
 		bool isEmpty() {
 			return this->size() == 0;
 		}
 };
-
+#endif

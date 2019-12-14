@@ -10,8 +10,7 @@
 using namespace std;
 
 template <typename T>
-class ArrayListImpl : public AbstractList<T>
-{
+class ArrayListImpl : public AbstractList<T> {
 	private:
 		T *elements;
 		int num;

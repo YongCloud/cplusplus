@@ -4,6 +4,8 @@
  * author xinjian
  * since 2019/12/12
  */
+#ifndef LIST_H
+#define LIST_H 
 template <typename T>
 class List
 {
@@ -64,3 +66,4 @@ class List
 		 */
 		virtual void print();
 };
+#endif
