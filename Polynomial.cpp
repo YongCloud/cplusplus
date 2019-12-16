@@ -161,7 +161,6 @@ Polynomial Polynomial::operator+(const Polynomial& other)
 		// exponent, from high to low
 		int e = length - i - 1;
 		Item* a = getItemWithExp(e);
-
 		Item* b = other.getItemWithExp(e);
 		if(a!=NULL && b!=NULL) {
 			ret.set(i,a->getCoef()+b->getCoef(),e);
