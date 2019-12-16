@@ -1,5 +1,8 @@
 /*
  * Polynomial class
+ * This file demonstates how to
+ * to implement operator overlaod
+ * in C++
  *
  * author xingjian
  * since 2019/12/16
@@ -16,6 +19,8 @@ class Item {
 		int exp;
 	public:
 		Item() {
+			this->coef = 0;
+			this->exp = 0;
 		}
 
 		Item(float coef,int exp) {
@@ -67,6 +72,10 @@ class Polynomial {
 			cout<<"destructor called"<<endl;
 		}
 
+		int getN() {
+			return n;
+		}
+
 		Item* getItem(int index);
 
 		Item* getItemWithExp(int exp) const;
@@ -79,7 +88,11 @@ class Polynomial {
 
 		void print();
 
+		// first implementation, member function
 		Polynomial operator+(const Polynomial& other);
+
+		// second implementation, friend function
+		friend Polynomial operator-(Polynomial& a,Polynomial& b);
 };
 
 Polynomial::Polynomial(int n)
@@ -161,6 +174,27 @@ Polynomial Polynomial::operator+(const Polynomial& other)
 	return ret;
 }
 
+Polynomial operator-(Polynomial& a,Polynomial& b)
+{
+	int length = a.getN()>b.getN()?a.getN():b.getN();
+	Polynomial ret(length);
+	for(int i=0; i<length; i++) {
+		// exponent, from high to low
+		int e = length - i - 1;
+		Item* pa = a.getItemWithExp(e);
+		Item* pb = b.getItemWithExp(e);
+		if(pa!=NULL && pb!=NULL) {
+			ret.set(i,pa->getCoef() - pb->getCoef(),e);
+		} else if(pa != NULL) {
+			ret.set(i,pa->getCoef(),e);
+		} else if(pb != NULL) {
+			ret.set(i,pb->getCoef(),e);
+		}
+	}
+	return ret;
+}
+
+
 void Polynomial::print()
 {
 	for(int i=0; i<n-1; i++) {
@@ -184,7 +218,7 @@ int main()
 	/*
 	 * Polynomial test
 	 * p(x) = 4x^3 + 3x^2 + 2x + 1
-	 * q(x) = 3x^2 + 5
+	 * q(x) = 7x^2 + 5
 	 */
 	Polynomial* p = new Polynomial(4);
 	p->set(0,4,3);
@@ -195,16 +229,22 @@ int main()
 	p->print();
 
 	Polynomial* q = new Polynomial(2);
-	q->set(0,3,2);
+	q->set(0,7,2);
 	q->set(1,5,0);
 	cout<<"q(x) = ";
 	q->print();
 
-	Polynomial pPlusq = p + q;
+	Polynomial pPlusq = *p + *q;
+	Polynomial pSubq = *p - *q;
+	cout<<"p(x) + q(x) = ";
 	pPlusq.print();
+	cout<<"p(x) - q(x) = ";
+	pSubq.print();
 
 	delete p;
+	p = NULL;
 	delete q;
+	q = NULL;
 
 	return 0;
 }
