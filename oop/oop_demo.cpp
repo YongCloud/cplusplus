@@ -8,7 +8,7 @@
  three features of OOP:
  Encapsulation --> 封装（安全、规范、可控、信息隐藏）
  Inheritance --> 继承（代码复用）
- Polymorphism --> 多态（动态、智能）
+ Polymorphism --> 多态（动态、智能、动感）
 
  author xingjian
  since 2019/12/07
