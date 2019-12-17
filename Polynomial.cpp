@@ -9,57 +9,16 @@
  */
 #include <iostream>
 #include <stdexcept>
+#include "polynomial_item.h"
 using namespace std;
 
-class Item {
-	private:
-		// coefficient
-		float coef;
-		// exponent
-		int exp;
-	public:
-		Item() {
-			this->coef = 0;
-			this->exp = 0;
-		}
-
-		Item(float coef,int exp) {
-			this->coef = coef;
-			this->exp = exp;
-		}
-
-		float getCoef() {
-			return this->coef;
-		}
-
-		int getExp() {
-			return this->exp;
-		}
-
-		void setCoef(float coef) {
-			this->coef = coef;
-		}
-
-		void setExp(int exp) {
-			this->exp = exp;
-		}
-
-		void print();
-};
-
-void Item::print()
-{
-	cout<<coef;
-	if(exp==0) {
-		// print nothing
-	} else if(exp==1) {
-		cout<<"x";
-	} else {
-		cout<<"x^"<<exp;
-	}
-}
+#define NL "\n"
 
 class Polynomial {
+		/* Actually, we should store all items
+		 * in a linkedlist.
+		 * Storage structure is simplified here.
+		 */
 	private:
 		Item *items;
 		int n;
@@ -69,7 +28,8 @@ class Polynomial {
 
 		~Polynomial() {
 			delete []items;
-			cout<<"destructor called"<<endl;
+			items = NULL;
+			cout<<"destructor called"<<NL;
 		}
 
 		int getN() {
@@ -91,8 +51,12 @@ class Polynomial {
 		// first implementation, member function
 		Polynomial operator+(const Polynomial& other);
 
+		Polynomial operator+=(const Polynomial& other);
+
 		// second implementation, friend function
 		friend Polynomial operator-(Polynomial& a,Polynomial& b);
+
+		friend Polynomial operator-=(Polynomial& a,Polynomial& b);
 };
 
 Polynomial::Polynomial(int n)
@@ -173,6 +137,17 @@ Polynomial Polynomial::operator+(const Polynomial& other)
 	return ret;
 }
 
+Polynomial Polynomial::operator+=(const Polynomial& other)
+{
+	static Polynomial ret = this->operator+(other);
+	// free before
+	this->~Polynomial();
+	// assignment
+	this->items = ret.items;
+	this->n = ret.n;
+	return *this;
+}
+
 Polynomial operator-(Polynomial& a,Polynomial& b)
 {
 	int length = a.getN()>b.getN()?a.getN():b.getN();
@@ -193,6 +168,16 @@ Polynomial operator-(Polynomial& a,Polynomial& b)
 	return ret;
 }
 
+Polynomial operator-=(Polynomial& a,Polynomial& b)
+{
+	static Polynomial ret = a - b;
+	// free before
+	a.~Polynomial();
+	// assignment
+	a.items = ret.items;
+	a.n = ret.n;
+	return a;
+}
 
 void Polynomial::print()
 {
@@ -201,7 +186,7 @@ void Polynomial::print()
 		cout<<" + ";
 	}
 	items[n-1].print();
-	cout<<endl;
+	cout<<NL;
 }
 
 // test
@@ -211,7 +196,7 @@ int main()
 	/*
 	Item item(2,4);
 	item.print();
-	cout<<endl;
+	cout<<NL;
 	*/
 
 	/*
@@ -234,11 +219,20 @@ int main()
 	q->print();
 
 	Polynomial pPlusq = *p + *q;
-	Polynomial pSubq = *p - *q;
 	cout<<"p(x) + q(x) = ";
 	pPlusq.print();
+
+	Polynomial pSubq = *p - *q;
 	cout<<"p(x) - q(x) = ";
 	pSubq.print();
+
+	*p += *q;
+	cout<<"after p(x)+=q(x), p(x) = ";
+	p->print();
+
+	*p -= *q;
+	cout<<"after p(x)-=q(x), p(x) = ";
+	p->print();
 
 	delete p;
 	p = NULL;
