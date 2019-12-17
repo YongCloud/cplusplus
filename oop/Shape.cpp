@@ -1,4 +1,5 @@
 /*
+ * polymorphism demonstration with C++.
  * implement polymorphism with virtual class.
  *
  * author xingjian
