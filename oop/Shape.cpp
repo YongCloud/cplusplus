@@ -83,10 +83,6 @@ class Square:public Rectangle {
 
 		Square(float edge):Rectangle(edge,edge) {
 		}
-
-		float Area() {
-			return getLength() * getWidth();
-		}
 };
 
 int main()
