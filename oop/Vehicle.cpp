@@ -1,5 +1,7 @@
 /*
- * encapsulation demonstration with C++.
+ * Inheritance demonstration with C++.
+ * This demo shows Multiple Inheritance
+ * and Virtual Base Class
  *
  * author xingjian
  * since 2019/12/17
@@ -43,7 +45,7 @@ class Vehicle {
 		}
 } ;
 
-class Bicycle:public Vehicle {
+class Bicycle:virtual public Vehicle {
 	private:
 		int height;
 	public:
@@ -70,7 +72,7 @@ class Bicycle:public Vehicle {
 		}
 };
 
-class Car:public Vehicle {
+class Car:virtual public Vehicle {
 	private:
 		int seatnum;
 	public:
@@ -103,13 +105,13 @@ class Motocycle:public Bicycle,public Car {
 		}
 
 		Motocycle(int speed,int weight,int height,int seatnum):
+			Vehicle(speed,weight),// why speed and weight is 0 without this line?
 			Bicycle(speed,weight,height),Car(speed,weight,seatnum) {
 		}
 
 		void print() {
-			//  reference to 'getSpeed' is ambiguous
-			cout<<"speed: "<<Car::getSpeed()<<
-			    " weight: "<<Car::getWeight()<<
+			cout<<"speed: "<<getSpeed()<<
+			    " weight: "<<getWeight()<<
 			    " height: "<<getHeight()<<
 			    " seatnum: "<<getSeatnum()<<endl;
 		}
@@ -117,9 +119,13 @@ class Motocycle:public Bicycle,public Car {
 
 int main()
 {
+	Bicycle* bi = new Bicycle(20,30,1);
+	bi->print();
 	Motocycle* moto = new Motocycle(60,240,1,2);
 	moto->print();
 
+	delete bi;
+	bi = NULL;
 	delete moto;
 	moto = NULL;
 
