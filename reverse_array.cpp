@@ -45,7 +45,7 @@ void intput_array(int *arr,int length)
 {
 	cout<<"please input "<<length<<" integers:"<<endl;
 	for(int i=0; i<length; i++) {
-		scanf("%d",arr+i);
+		cin>>arr[i];
 	}
 }
 
