@@ -14,17 +14,24 @@ using namespace std;
 
 int main()
 {
-	int a,b,high,k;
+	int a,b,k;
 	for(int i=1; i<=9; i++) { // 9
 		a = i*i*i;
-		high = pow(N-a,1.0/3) + 1;
-		for(int j=0; j<=high; j++) { // 11
+		for(int j=0; j<=9; j++) { // 10
 			b = N - a - j*j*j;
-			k =  pow(b,1.0/3);
+			// cout<<pow(729,1.0/3)<<endl; --> 9
+			// k = pow(729,1.0/3);  --> 8
+			// Oh my God, what happened?
+			k = pow(b,1.0/3);
 			if(b == k*k*k) {
-				cout<<(i*100 + j*10 + k)<<endl;
+				cout<<(i*100 + j*10 + k)<<"\n";
+			}
+			k++;
+			if(b == k*k*k) {
+				cout<<(i*100 + j*10 + k)<<"\n";
 			}
 		}
 	}
+
 	return 0;
 }
